@@ -10,7 +10,7 @@ CATEGORY_CHOICES = (
 )
 
 
-class Products(models.Model):
+class Product(models.Model):
     title = models.CharField(max_length=30, null=False, blank=False, verbose_name='Название')
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default=CATEGORY_CHOICES[0][0],
                                 verbose_name='Категория')
@@ -24,7 +24,7 @@ class Products(models.Model):
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL,
                              verbose_name='Пользователь', related_name='orders')
-    product = models.ForeignKey('Products', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Товар')
+    product = models.ForeignKey('Product', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Товар')
 
     review_text = models.CharField(max_length=1000, null=False, blank=False, verbose_name='Текст отзывы')
     assessment = models.FloatField(verbose_name='оценка')

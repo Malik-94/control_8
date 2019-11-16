@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Product_view{% endblock %}
+{% block menu %}
+{#    {% if request.user.is_authenticated %}#}
+{#        <li><a href="{% url 'webapp:product_update' product.pk %}">Edit</a></li>#}
+{#        <li><a href="{% url 'webapp:product_delete' product.pk %}">Delete</a></li>#}
+{#    {% endif %}#}
+{#    {% if request.user.is_authenticated and request.user.team_user.project == task.project.pk%}#}
+{#        <li><a href="{% url 'webapp:task_update' task.pk %}">Edit</a></li>#}
+{#        <li><a href="{% url 'webapp:task_delete' task.pk %}">Delete</a></li>#}
+{#    {% endif %}#}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        {% if not product.picture or product.picture == 'False' %}
+            {% load static %}
+            <img class="avatar" src="{% static 'images/no_photo.jpg' %}" width="250" height="250" alt="no picture">
+        {% else %}
+            <img class="avatar" src="{{ product.picture.url }}" width="250" height="250" alt="product picture">
+        {% endif %}
+        <h1>{{ product.name }}</h1>
+        <p>Категория: {{ product.category }}</p>
+        <p>Описание: {{ product.description }}</p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3>Отзывы:</h3>
+    {% for review in product.reviews.all %}
+        <div class="task">
+            <p><b>{{ review.user }}</b></p>
+            <p>Отзыв: {{ review.review }}</p>
+            <p>Оценка: {{ review.point }}</p>
+{#            <p class="projects-links">#}
+{#                <a href="{% url 'webapp:task_view' task.pk %}">More</a>#}
+{#                <a href="{% url 'webapp:comment_update' comment.pk %}">Edit</a>#}
+{#                <a href="{% url 'webapp:comment_delete' comment.pk %}">Delete</a>#}
+{#            </p>#}
+        </div>
+    {% empty %}
+        <p>Нет отзывов.</p>
+    {% endfor %}
+{#    {% if request.user.is_authenticated %}#}
+{#        <form action="{% url 'webapp:project_task_create' project.pk %}" method="POST" id="add_task">#}
+{#            {% include 'partial/task_form.html' with button_text='Add task' %}#}
+{#        </form>#}
+{#    {% endif %}#}
+{% endblock %}
