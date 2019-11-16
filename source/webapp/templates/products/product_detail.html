@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Product_view{% endblock %}
 {% block menu %}
-{#    {% if request.user.is_authenticated %}#}
-{#        <li><a href="{% url 'webapp:product_update' product.pk %}">Edit</a></li>#}
-{#        <li><a href="{% url 'webapp:product_delete' product.pk %}">Delete</a></li>#}
-{#    {% endif %}#}
-{#    {% if request.user.is_authenticated and request.user.team_user.project == task.project.pk%}#}
-{#        <li><a href="{% url 'webapp:task_update' task.pk %}">Edit</a></li>#}
-{#        <li><a href="{% url 'webapp:task_delete' task.pk %}">Delete</a></li>#}
-{#    {% endif %}#}
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -30,20 +22,17 @@
     {% for review in product.reviews.all %}
         <div class="task">
             <p><b>{{ review.user }}</b></p>
-            <p>Отзыв: {{ review.review }}</p>
-            <p>Оценка: {{ review.point }}</p>
-{#            <p class="projects-links">#}
-{#                <a href="{% url 'webapp:task_view' task.pk %}">More</a>#}
-{#                <a href="{% url 'webapp:comment_update' comment.pk %}">Edit</a>#}
-{#                <a href="{% url 'webapp:comment_delete' comment.pk %}">Delete</a>#}
-{#            </p>#}
+            <p>Отзыв: {{ review.review_text }}</p>
+            <p>Оценка: {{ review.assessment }}</p>
+            <p class="projects-links">
+                <a href="{% url 'webapp:review_update' review.pk %}">Edit</a>
+                <a href="{% url 'webapp:review_delete' review.pk %}">Delete</a>
+            </p>
         </div>
     {% empty %}
         <p>Нет отзывов.</p>
     {% endfor %}
-{#    {% if request.user.is_authenticated %}#}
-{#        <form action="{% url 'webapp:project_task_create' project.pk %}" method="POST" id="add_task">#}
-{#            {% include 'partial/task_form.html' with button_text='Add task' %}#}
-{#        </form>#}
-{#    {% endif %}#}
+        <form action="{% url 'webapp:product_review_create' product.pk %}" method="POST" id="add_review">
+            {% include 'partial/form.html' with button_text='Add review' %}
+        </form>
 {% endblock %}

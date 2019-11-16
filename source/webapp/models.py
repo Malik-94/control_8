@@ -23,8 +23,8 @@ class Product(models.Model):
 
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL,
-                             verbose_name='Пользователь', related_name='orders')
-    product = models.ForeignKey('Product', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Товар')
+                             verbose_name='Пользователь', related_name='reviews')
+    product = models.ForeignKey('Product',related_name='reviews', null=True, blank=True, on_delete=models.CASCADE, verbose_name='Товар')
 
     review_text = models.CharField(max_length=1000, null=False, blank=False, verbose_name='Текст отзывы')
     assessment = models.FloatField(verbose_name='оценка')

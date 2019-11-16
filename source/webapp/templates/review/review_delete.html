@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Delete Review{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'webapp:product_view' obj.product_id %}">View product</a></li>
+{% endblock %}
+{% block content %}
+    <h1>Are you sure want to delete review "{{ obj }}"?</h1>
+    <form method="POST" action="{% url "webapp:review_delete" obj.pk %}" class="text-center">
+        {% csrf_token %}
+        <p><input type="submit" value="Confirm"></p>
+        <p><a href="{% url "webapp:product_view" obj.product_id %}">Cancel</a></p>
+    </form>
+{% endblock %}
