@@ -1,10 +1,13 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Title</title>#}
-{#</head>#}
-{#<body>#}
-{##}
-{#</body>#}
-{#</html>#}
+{% extends "base.html" %}
+{% block title %}Delete Product{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'webapp:product_view' obj.pk %}">View</a></li>
+{% endblock %}
+{% block content %}
+    <h1>Are you sure want to delete product "{{ obj }}"?</h1>
+    <form method="POST" action="{% url "webapp:product_delete" obj.pk %}" class="text-center">
+        {% csrf_token %}
+        <p><input type="submit" value="Confirm"></p>
+        <p><a href="{% url "webapp:product_view" obj.pk %}">Cancel</a></p>
+    </form>
+{% endblock %}

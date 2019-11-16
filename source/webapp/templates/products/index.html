@@ -10,6 +10,10 @@
             <div>Категория: {{ product.category }}</div>
             <a href="{% url 'webapp:product_view' product.pk %}">More...</a>
             <a href="{% url 'webapp:product_create'  %}">create</a>
+           <a href="{% url 'webapp:product_delete' product.pk %}">delete</a>
+           <a href="{% url 'webapp:product_update' product.pk %}">update</a>
+
+
 
         {% endfor %}
 
