@@ -23,6 +23,7 @@
         <div class="task">
             <p><b>{{ review.user }}</b></p>
             <p>Отзыв: {{ review.review_text }}</p>
+{#           <p>email:{{ review.user.email }}</p>
             <p>Оценка: {{ review.assessment }}</p>
             <p class="projects-links">
                 <a href="{% url 'webapp:review_update' review.pk %}">Edit</a>
